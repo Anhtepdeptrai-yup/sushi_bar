@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi_bar/theme/colors.dart';
 import '../util/button.dart';
 import '../models/food.dart';
+import '../util/food_details_page.dart';
 import '../util/food_tile.dart';
 
 class MenuPage extends StatefulWidget {
@@ -75,6 +76,18 @@ class _MenuPageState extends State<MenuPage> {
 
   ];
 
+  void navigateFoodDetails(int index) {
+    // navigate to food details page
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => FoodDetailsPage(
+              food: foodMenu[index],
+            ),
+        ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,15 +103,42 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ),
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          color: Colors.grey.shade900,
-          onPressed: () {
-            // open drawer
+        elevation: 0,
+      ),
 
-          },
+      drawer: Drawer(
+        backgroundColor: Colors.grey.shade100,
+        child: Column(
+          children: [
+            DrawerHeader(
+              child: Icon(
+                Icons.menu,
+                size: 48,
+              ),
+            ),
+
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("INTRO PAGE"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/intro_page');
+              },
+            ),
+
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text("SETTINGS"),
+              onTap: () {
+                Navigator.pop(context);
+
+              },
+            ),
+
+          ],
         ),
       ),
+
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -169,7 +209,7 @@ class _MenuPageState extends State<MenuPage> {
             ),
           ),
 
-          // menu list
+          // menu text
           Padding(
             child: Text(
               "Food Menu",
@@ -183,12 +223,16 @@ class _MenuPageState extends State<MenuPage> {
             padding: const EdgeInsets.all(25)
           ),
 
+          //menu horizontal list
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: foodMenu.length,
               itemBuilder: (context, index) => FoodTile(
                 food: foodMenu[index],
+                onTap: () {
+                  navigateFoodDetails(index);
+                },
               ),
             ),
           ),
@@ -255,7 +299,6 @@ class _MenuPageState extends State<MenuPage> {
               ],
             )
           )
-
 
         ],
       ),
