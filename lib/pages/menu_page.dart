@@ -5,6 +5,8 @@ import '../util/button.dart';
 import '../models/food.dart';
 import '../util/food_details_page.dart';
 import '../util/food_tile.dart';
+import 'package:provider/provider.dart';
+import '../models/shop.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -17,67 +19,12 @@ class _MenuPageState extends State<MenuPage> {
 
   // food menu list
 
-  List foodMenu = [
-    // salmon nigiri
-    Food(
-      name: "Salmon Nigiri",
-      price: "6.00",
-      imagePath: "lib/images/salmon_nigiri.png",
-      rating: "4.9",
-    ),
-
-    // tuna nigiri
-    Food(
-      name: "Tuna Nigiri",
-      price: "5.75",
-      imagePath: "lib/images/tuna_nigiri.png",
-      rating: "4.6",
-    ),
-
-    // uramaki
-    Food(
-      name: "Uramaki",
-      price: "4.50",
-      imagePath: "lib/images/uramaki.png",
-      rating: "4.7",
-    ),
-
-    // many salmon eggs
-    Food(
-      name: "Salmon Eggs",
-      price: "6.50",
-      imagePath: "lib/images/many_salmon_eggs.png",
-      rating: "4.2",
-    ),
-
-    // egg sushi
-    Food(
-      name: "Egg Nigiri",
-      price: "4.00",
-      imagePath: "lib/images/egg_nigiri.png",
-      rating: "4.5",
-    ),
-
-    // salmon sushi
-    Food(
-      name: "Salmon Sushi",
-      price: "5.00",
-      imagePath: "lib/images/salmon_sushi.png",
-      rating: "4.8",
-    ),
-
-    // traditional sushi
-    Food(
-      name: "Traditional Sushi",
-      price: "3.50",
-      imagePath: "lib/images/traditional_sushi.png",
-      rating: "4.3",
-    ),
-
-  ];
 
   void navigateFoodDetails(int index) {
     // navigate to food details page
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
+
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -90,6 +37,10 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
+
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(

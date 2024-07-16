@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi_bar/util/button.dart';
 import '../models/food.dart';
 import '../theme/colors.dart';
+import 'package:provider/provider.dart';
+import '../models/shop.dart';
 
 class FoodDetailsPage extends StatefulWidget {
   final Food food;
@@ -39,6 +41,42 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
   //add to cart
   void addToCart() {
     //add to cart
+    if(quantity > 0) {
+      // get access to shop items
+      final shop = context.read<Shop>();
+
+      // add to cart
+      shop.addToCart(widget.food, quantity);
+
+      // notify user
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          backgroundColor: primaryColor,
+          content: Text(
+            "Sucessfully added to cart!",
+            style: GoogleFonts.montserrat(
+              color: Colors.white,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.done,
+                color: Colors.white,
+              ),
+            )
+          ]
+        )
+      );
+
+    }
   }
 
   @override
