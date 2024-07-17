@@ -45,6 +45,7 @@ class _MenuPageState extends State<MenuPage> {
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        foregroundColor: Colors.grey.shade900,
         title: Text(
           'DRIFSHI',
           style: GoogleFonts.kanit(
@@ -55,6 +56,16 @@ class _MenuPageState extends State<MenuPage> {
         ),
         centerTitle: true,
         elevation: 0,
+        actions: [
+          // cart button to go to cart page
+          IconButton(
+            onPressed:() {
+              // go to cart page
+              Navigator.pushNamed(context, 'cart_page');
+            },
+            icon: Icon(Icons.shopping_cart),
+          )
+        ],
       ),
 
       drawer: Drawer(

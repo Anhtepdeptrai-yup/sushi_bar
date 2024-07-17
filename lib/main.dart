@@ -3,6 +3,7 @@ import 'package:sushi_bar/pages/menu_page.dart';
 import 'pages/intro_page.dart';
 import 'package:provider/provider.dart';
 import 'models/shop.dart';
+import 'pages/cart_page.dart';
 
 
 void main() {
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/intro_page': (context) => const IntroPage(),
         '/menu_page': (context) => const MenuPage(),
+        'cart_page': (context) => const CartPage(),
       },
     );
   }
